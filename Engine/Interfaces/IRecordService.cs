@@ -20,6 +20,15 @@ namespace MarkTek.Fluent.Testing.RecordGeneration
         IRecordService<TID> AssertAgainst<TType>(BaseValidator<TID, TType> spec);
 
         /// <summary>
+        /// Assert against one or more assertions with a custom policy.
+        /// </summary>
+        /// <typeparam name="TType"></typeparam>
+        /// <param name="spec"></param>
+        /// <param name="policy"></param>
+        /// <returns></returns>
+        IRecordService<TID> AssertAgainst<TType>(BaseValidator<TID, TType> spec, Policy policy);
+
+        /// <summary>
         /// Performs an action and waits for it to complete before proceeding.
         /// </summary>
         /// <param name="implemetation"></param>

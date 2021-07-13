@@ -108,6 +108,19 @@ namespace Marktek.Fluent.Testing.Engine.Tests
         }
 
         [TestMethod]
+        public void Can_Validate_Using_The_Aggregate_With_Custom_Policy()
+        {
+            Policy testPolicy = Policy
+           .Handle<AssertFailedException>()
+           .WaitAndRetry(4, retryAttempt => TimeSpan.FromSeconds(1));
+
+            service
+                .CreateRecord(new CreateDummyExample())
+                .AssertAgainst(new DummyAssertionWithCustomPolicy(service.GetAggregateId()), testPolicy);
+        }
+
+
+        [TestMethod]
         public void Can_Cleanup_When_No_Records_Created()
         {
             service

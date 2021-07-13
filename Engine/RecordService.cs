@@ -129,6 +129,23 @@ namespace MarkTek.Fluent.Testing.RecordGeneration
         }
 
         /// <summary>
+        /// Assert against one or more assertions with a custom policy.
+        /// </summary>
+        /// <typeparam name="TType"></typeparam>
+        /// <param name="spec"></param>
+        /// <param name="policy"></param>
+        /// <returns></returns>
+        public IRecordService<TID> AssertAgainst<TType>(BaseValidator<TID, TType> spec, Policy policy)
+        {
+            policy.Execute(() =>
+            {
+                spec.Validate(AggregateId);
+            });
+
+            return this;
+        }
+
+        /// <summary>
         /// Execute method based on Condition. Useful for Scenarios where you want to configure the behaviour
         /// </summary>
         /// <param name="condition"></param>
